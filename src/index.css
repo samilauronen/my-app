@@ -4,10 +4,21 @@
   }
 
   .sliders {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr;
+    gap: 2% 0px;
+    grid-template-areas:
+      "slider1"
+      "slider2";
     position: absolute;
     top: 1%;
     left: 1%;
     }
+    .slider1 { grid-area: slider1; }
+    .slider2 { grid-area: slider2; align-self: end ;}
+
+
   .canvas {
     max-width:100%;
     max-height:100%;

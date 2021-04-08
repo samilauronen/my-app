@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import { render } from '@testing-library/react';
+import ColorPicker from 'material-ui-color-picker'
 import './index.css'
 
 const sliderMargin = {
@@ -23,7 +24,9 @@ class Canvas extends React.Component {
     const ctx = canvas.getContext("2d")
     const img = this.refs.image
 
-    let fractal = generateFractalTree([canvas.width/2,canvas.height], -Math.PI/2, this.props.length, this.props.angle, 0.9)
+    let fractal = generateFractalTree([canvas.width/2,canvas.height], -Math.PI/2,
+      this.props.length, this.props.angle, 0.9,
+      this.props.lineColor, this.props.flowerSize, this.props.flowerColor)
     fractal.drawToDepth(this.props.depth, ctx)
   }
 
@@ -33,7 +36,8 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <div className="innerCanvas" key={this.props.angle + this.props.depth + this.props.length}>
+      <div className="innerCanvas" key={this.props.angle + this.props.depth + this.props.length +
+            this.props.flowerSize + this.props.flowerColor + this.props.lineColor}>
         <canvas ref="canv" className="actualCanvas" width={2000} height={900}/>
       </div>
       )
@@ -45,27 +49,33 @@ class Canvas extends React.Component {
 class InputSlider extends React.Component {
   constructor(props) {
     super(props)
-    this.angle = Math.PI/8;
+    this.angle = Math.PI/4;
     this.depth = 8;
-    this.length = 100;
+    this.length = 130;
+    this.flowerSize=4;
+    this.flowerColor = '#faa046';
+    this.lineColor = '#00000';
   }
 
   render() {
     return (
     <div className={"container"}>
     <div className={"sliders"}>
+      <div className={"slider1"}>
       <Typography id="discrete-slider-small-steps" gutterBottom>
         Split angle
       </Typography>
       <Slider
-        defaultValue={Math.PI/8}
+        defaultValue={Math.PI/4}
         onChange={(e,val) => {this.angle = val; this.forceUpdate()} }
         aria-labelledby="continuous-slider"
         step={Math.PI/100}
-        marks={[{value:0, label: '0'},  {value:Math.PI/8, label: '22.5°'}, {value:Math.PI/4, label: '45°'}, {value:Math.PI*3/8, label: '67.5°'}, {value:Math.PI/2, label: '90°'}]}
+        marks={[{value:0, label: '0'},  {value:Math.PI/2, label: '90°'}, {value:Math.PI, label: '180°'}]}
         min={0}
-        max={Math.PI/2}
+        max={Math.PI}
       />
+      </div>
+      <div className={"slider2"}>
      <Typography id="discrete-slider" gutterBottom>
         Recursion depth
       </Typography>
@@ -75,27 +85,68 @@ class InputSlider extends React.Component {
         valueLabelDisplay="auto"
         onChange={(e,val) => {this.depth = val; this.forceUpdate()} }
         step={1}
-        marks
+        //marks={[{value:0, label: '0'},  {value:5, label: '5'}, {value:10, label: '10'}, {value:15, label: '15'}]}
         min={1}
         max={15}
       />
+      </div>
+      <div className={"slider3"}>
       <Typography id="discrete-slider" gutterBottom>
         Base length
       </Typography>
       <Slider
-        defaultValue={100}
+        defaultValue={130}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         onChange={(e,val) => {this.length = val; this.forceUpdate()} }
         step={5}
-        marks
-        track="inverted"
+        //marks={[{value:50, label: '50'}, {value:200, label: '200'}, {value:400, label: '400'}]}
         min={50}
         max={400}
       />
+      </div>
+      <div className={"slider4"}>
+      <Typography id="discrete-slider" gutterBottom>
+        Flower radius
+      </Typography>
+      <Slider
+        defaultValue={4}
+        aria-labelledby="discrete-slider"
+        valueLabelDisplay="auto"
+        onChange={(e,val) => {this.flowerSize = val; this.forceUpdate()} }
+        step={1}
+        marks
+        min={0}
+        max={20}
+      />
+      </div>
+      <div className={"colorpicker1"}>
+      <Typography id="colorpicker" gutterBottom>
+        Flower color
+      </Typography>
+      <ColorPicker
+        defaultValue={this.flowerColor}
+        TextFieldProps={{ value: this.flowerColor }}
+        value={this.flowerColor}
+        onChange={(color) => {this.flowerColor = color; this.forceUpdate()}}
+      />
+      </div>
+      <div className={"colorpicker2"}>
+      <Typography id="colorpicker" gutterBottom>
+        Line Color
+      </Typography>
+      <ColorPicker
+        defaultValue={this.lineColor}
+        TextFieldProps={{ value: this.lineColor }}
+        value={this.lineColor}
+        onChange={(color) => {this.lineColor = color; this.forceUpdate()}}
+      />
+      </div>
     </div>
     <div className="canvas" >
-      <Canvas angle={this.angle} depth={this.depth} length={this.length}></Canvas>
+      <Canvas angle={this.angle} depth={this.depth} length={this.length}
+              flowerSize={this.flowerSize} flowerColor={this.flowerColor} lineColor={this.lineColor}>
+      </Canvas>
     </div>
     </div>)
   }

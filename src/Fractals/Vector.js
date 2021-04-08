@@ -1,11 +1,13 @@
 class Vector {
-    constructor(startpoint, length, angle, color, width, bulb) {
+    constructor(startpoint, length, angle, color, width, flowerEnabled, flowerSize, flowerColor) {
         this.startpoint = startpoint
         this.length = Number(length)
         this.angle = Number(angle)
         this.color = color
         this.width = width
-        this.bulb = bulb
+        this.flowerEnabled = flowerEnabled
+        this.flowerSize = flowerSize
+        this.flowerColor = flowerColor
     }
 
     get endpoint() {
@@ -27,12 +29,12 @@ class Vector {
         ctx.moveTo(x, y)
         ctx.lineTo(end_x, end_y)
         ctx.stroke()
-        if(this.bulb) {
+        if(this.flowerEnabled) {
             ctx.beginPath();
             ctx.lineWidth = 1
             ctx.strokeStyle = this.color
-            ctx.fillStyle = '#faa046'
-            ctx.arc(end_x, end_y, 2, 0, 2 * Math.PI)
+            ctx.fillStyle = this.flowerColor
+            ctx.arc(end_x, end_y, this.flowerSize, 0, 2 * Math.PI)
             ctx.fill()
         }
         
