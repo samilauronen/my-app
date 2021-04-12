@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/fractal-playground/static/css/main.314edd25.chunk.css",
-    "main.js": "/fractal-playground/static/js/main.f789c260.chunk.js",
-    "main.js.map": "/fractal-playground/static/js/main.f789c260.chunk.js.map",
+    "main.js": "/fractal-playground/static/js/main.55f3ddc0.chunk.js",
+    "main.js.map": "/fractal-playground/static/js/main.55f3ddc0.chunk.js.map",
     "runtime-main.js": "/fractal-playground/static/js/runtime-main.49566da6.js",
     "runtime-main.js.map": "/fractal-playground/static/js/runtime-main.49566da6.js.map",
-    "static/js/2.db4aa464.chunk.js": "/fractal-playground/static/js/2.db4aa464.chunk.js",
-    "static/js/2.db4aa464.chunk.js.map": "/fractal-playground/static/js/2.db4aa464.chunk.js.map",
+    "static/js/2.f41e795b.chunk.js": "/fractal-playground/static/js/2.f41e795b.chunk.js",
+    "static/js/2.f41e795b.chunk.js.map": "/fractal-playground/static/js/2.f41e795b.chunk.js.map",
     "index.html": "/fractal-playground/index.html",
     "static/css/main.314edd25.chunk.css.map": "/fractal-playground/static/css/main.314edd25.chunk.css.map",
-    "static/js/2.db4aa464.chunk.js.LICENSE.txt": "/fractal-playground/static/js/2.db4aa464.chunk.js.LICENSE.txt"
+    "static/js/2.f41e795b.chunk.js.LICENSE.txt": "/fractal-playground/static/js/2.f41e795b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.49566da6.js",
-    "static/js/2.db4aa464.chunk.js",
+    "static/js/2.f41e795b.chunk.js",
     "static/css/main.314edd25.chunk.css",
-    "static/js/main.f789c260.chunk.js"
+    "static/js/main.55f3ddc0.chunk.js"
   ]
 }
