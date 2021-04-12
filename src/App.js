@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import {generateFractalTree, setSplitAngle} from './Fractals/FractalGenerator'
+import FractalTree from './fractals/fractal-tree/tree-generator'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,30 +7,30 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import { render } from '@testing-library/react';
 import ColorPicker from 'material-ui-color-picker'
+import {getChangedProps} from './fractals/utils'
 import './index.css'
 
-const sliderMargin = {
-  top: '10%'
-}
 
 class Canvas extends React.Component {
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    Object.keys(getChangedProps(prevProps, this.props)).forEach(
+      key => { this.fractal.update(key, this.props[key]) });
     this.draw()
   }
 
   draw() {
     const canvas = this.refs.canv
     const ctx = canvas.getContext("2d")
-    const img = this.refs.image
-
-    let fractal = generateFractalTree([canvas.width/2,canvas.height], -Math.PI/2,
-      this.props.length, this.props.angle, 0.9,
-      this.props.lineColor, this.props.flowerSize, this.props.flowerColor)
-    fractal.drawToDepth(this.props.depth, ctx)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.fractal.draw(ctx)
   }
 
   componentDidMount() {
+    const canvas = this.refs.canv
+    this.fractal = new FractalTree([canvas.width/2,canvas.height], this.props.length, this.props.angle,
+                    this.props.lineColor, this.props.flowerSize, this.props.flowerColor)
+    this.fractal.createWithDepth(this.props.depth)
     this.draw()
   }
 
@@ -69,7 +69,7 @@ class InputSlider extends React.Component {
         defaultValue={Math.PI/4}
         onChange={(e,val) => {this.angle = val; this.forceUpdate()} }
         aria-labelledby="continuous-slider"
-        step={Math.PI/100}
+        step={Math.PI/1000}
         marks={[{value:0, label: '0'},  {value:Math.PI/2, label: '90°'}, {value:Math.PI, label: '180°'}]}
         min={0}
         max={Math.PI}
