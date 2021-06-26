@@ -29,15 +29,15 @@ class FractalTree {
         switch(key) {
             case "flowerSize":
                 this.circleRadius = value
-                this.circles.forEach( circle => circle.radius = this.circleRadius);
+                this.circles.forEach( circle => circle.radius = this.circleRadius );
                 break;
             case "flowerColor":
                 this.circleColor = value
-                this.circles.forEach( circle => circle.color = this.circleColor);
+                this.circles.forEach( circle => circle.color = this.circleColor );
                 break;
             case "lineColor":
                 this.lineColor = value
-                this.lines.forEach( line => line.color = this.lineColor);
+                this.lines.forEach( line => line.color = this.lineColor );
                 break;
             case "length":
                 this.baseLength = value;

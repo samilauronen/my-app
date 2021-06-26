@@ -16,21 +16,21 @@ class Canvas extends React.Component {
   componentDidUpdate(prevProps) {
     Object.keys(getChangedProps(prevProps, this.props)).forEach(
       key => { this.fractal.update(key, this.props[key]) });
-    this.draw()
+    this.draw();
   }
 
   draw() {
-    const canvas = this.refs.canv
-    const ctx = canvas.getContext("2d")
+    const canvas = this.refs.canv;
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.fractal.draw(ctx)
+    this.fractal.draw(ctx);
   }
 
   componentDidMount() {
-    const canvas = this.refs.canv
+    const canvas = this.refs.canv;
     this.fractal = new FractalTree([canvas.width/2,canvas.height], this.props.length, this.props.angle,
-                    this.props.lineColor, this.props.flowerSize, this.props.flowerColor)
-    this.fractal.createWithDepth(this.props.depth)
+                    this.props.lineColor, this.props.flowerSize, this.props.flowerColor);
+    this.fractal.createWithDepth(this.props.depth);
     this.draw()
   }
 
@@ -46,108 +46,143 @@ class Canvas extends React.Component {
 
 
 
+// class AdjustmentPanel extends React.Component {
+
+//   constructor(props) {
+//     super(props);
+//     this.components = [];
+//   }
+
+//   addComponent(name, newComponent) {
+//     this.components.push(
+//       <div className={this.classNameOf(this.components.length)}>
+//         <Typography>
+//           {name}
+//         </Typography>
+//         {newComponent}
+//       </div>
+//     );
+//   }
+
+//   classNameOf(index) {
+//     return "AdjustmentPanel-component" + index
+//   }
+
+//   render() {
+//     return (
+//       <div className="AdjustmentPanel-container">
+//         {this.components}
+//       </div>)
+//   }
+// }
+
 class InputSlider extends React.Component {
+
   constructor(props) {
-    super(props)
-    this.angle = Math.PI/4;
-    this.depth = 8;
-    this.length = 130;
-    this.flowerSize=4;
-    this.flowerColor = '#faa046';
-    this.lineColor = '#00000';
+    super(props);
+
+    // default values for adjustment parameters
+    this.state = {
+      angle: Math.PI/4,
+      depth: 8,
+      length: 130,
+      flowerSize: 4,
+      flowerColor: '#faa046',
+      lineColor: '#00000'
+    };
   }
 
   render() {
     return (
     <div className={"container"}>
-    <div className={"sliders"}>
-      <div className={"slider1"}>
-      <Typography id="discrete-slider-small-steps" gutterBottom>
-        Split angle
-      </Typography>
-      <Slider
-        defaultValue={Math.PI/4}
-        onChange={(e,val) => {this.angle = val; this.forceUpdate()} }
-        aria-labelledby="continuous-slider"
-        step={Math.PI/1000}
-        marks={[{value:0, label: '0'},  {value:Math.PI/2, label: '90°'}, {value:Math.PI, label: '180°'}]}
-        min={0}
-        max={Math.PI}
-      />
+      <div className={"sliders"}>
+        <div className={"slider1"}>
+          <Typography>
+            Split angle
+          </Typography>
+          <Slider
+            defaultValue={this.state.angle}
+            onChange={(e,val) => this.setState({angle: val})}
+            aria-labelledby="continuous-slider"
+            step={Math.PI/1000}
+            marks={[{value:0, label: '0'},  {value:Math.PI/2, label: '90°'}, {value:Math.PI, label: '180°'}]}
+            min={0}
+            max={Math.PI}
+          />
+        </div>
+        <div className={"slider2"}>
+          <Typography>
+            Recursion depth
+          </Typography>
+          <Slider
+            defaultValue={this.state.depth}
+            aria-labelledby="discrete-slider"
+            valueLabelDisplay="auto"
+            onChange={(e,val) => this.setState({depth: val})}
+            step={1}
+            //marks={[{value:0, label: '0'},  {value:5, label: '5'}, {value:10, label: '10'}, {value:15, label: '15'}]}
+            min={1}
+            max={15}
+          />
+        </div>
+        <div className={"slider3"}>
+          <Typography>
+            Base length
+          </Typography>
+          <Slider
+            defaultValue={this.state.length}
+            aria-labelledby="discrete-slider"
+            valueLabelDisplay="auto"
+            onChange={(e,val) => this.setState({length: val})}
+            step={5}
+            //marks={[{value:50, label: '50'}, {value:200, label: '200'}, {value:400, label: '400'}]}
+            min={50}
+            max={400}
+          />
+        </div>
+        <div className={"slider4"}>
+          <Typography>
+            Flower radius
+          </Typography>
+          <Slider
+            defaultValue={this.state.flowerSize}
+            aria-labelledby="discrete-slider"
+            valueLabelDisplay="auto"
+            onChange={(e,val) => this.setState({flowerSize: val})}
+            step={1}
+            marks
+            min={0}
+            max={20}
+          />
+        </div>
+        <div className={"colorpicker1"}>
+          <Typography>
+            Flower color
+          </Typography>
+          <ColorPicker
+            defaultValue={this.state.flowerColor}
+            TextFieldProps={{ value: this.state.flowerColor }}
+            value={this.state.flowerColor}
+            onChange={(color) => this.setState({flowerColor: color})}
+          />
+        </div>
+        <div className={"colorpicker2"}>
+          <Typography>
+            Line Color
+          </Typography>
+          <ColorPicker
+            defaultValue={this.state.lineColor}
+            TextFieldProps={{ value: this.state.lineColor }}
+            value={this.state.lineColor}
+            onChange={(color) => this.setState({lineColor: color})}
+          />
+        </div>
       </div>
-      <div className={"slider2"}>
-     <Typography id="discrete-slider" gutterBottom>
-        Recursion depth
-      </Typography>
-      <Slider
-        defaultValue={8}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        onChange={(e,val) => {this.depth = val; this.forceUpdate()} }
-        step={1}
-        //marks={[{value:0, label: '0'},  {value:5, label: '5'}, {value:10, label: '10'}, {value:15, label: '15'}]}
-        min={1}
-        max={15}
-      />
+      <div className="canvas" >
+        <Canvas angle={this.state.angle} depth={this.state.depth} length={this.state.length}
+                flowerSize={this.state.flowerSize} flowerColor={this.state.flowerColor} lineColor={this.state.lineColor}>
+        </Canvas>
       </div>
-      <div className={"slider3"}>
-      <Typography id="discrete-slider" gutterBottom>
-        Base length
-      </Typography>
-      <Slider
-        defaultValue={130}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        onChange={(e,val) => {this.length = val; this.forceUpdate()} }
-        step={5}
-        //marks={[{value:50, label: '50'}, {value:200, label: '200'}, {value:400, label: '400'}]}
-        min={50}
-        max={400}
-      />
-      </div>
-      <div className={"slider4"}>
-      <Typography id="discrete-slider" gutterBottom>
-        Flower radius
-      </Typography>
-      <Slider
-        defaultValue={4}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        onChange={(e,val) => {this.flowerSize = val; this.forceUpdate()} }
-        step={1}
-        marks
-        min={0}
-        max={20}
-      />
-      </div>
-      <div className={"colorpicker1"}>
-      <Typography id="colorpicker" gutterBottom>
-        Flower color
-      </Typography>
-      <ColorPicker
-        defaultValue={this.flowerColor}
-        TextFieldProps={{ value: this.flowerColor }}
-        value={this.flowerColor}
-        onChange={(color) => {this.flowerColor = color; this.forceUpdate()}}
-      />
-      </div>
-      <div className={"colorpicker2"}>
-      <Typography id="colorpicker" gutterBottom>
-        Line Color
-      </Typography>
-      <ColorPicker
-        defaultValue={this.lineColor}
-        TextFieldProps={{ value: this.lineColor }}
-        value={this.lineColor}
-        onChange={(color) => {this.lineColor = color; this.forceUpdate()}}
-      />
-      </div>
-    </div>
-    <div className="canvas" >
-      <Canvas angle={this.angle} depth={this.depth} length={this.length}
-              flowerSize={this.flowerSize} flowerColor={this.flowerColor} lineColor={this.lineColor}>
-      </Canvas>
-    </div>
     </div>)
   }
 }
