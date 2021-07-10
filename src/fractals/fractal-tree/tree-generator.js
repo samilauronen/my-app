@@ -1,5 +1,5 @@
-import Line from './line.js'
-import Circle from './circle.js'
+import Line from '../shapes/line.js'
+import Circle from '../shapes/circle.js'
 
 const LENGTH_DECAY_FACTOR = 0.9;
 const LINE_WIDTH = 2;

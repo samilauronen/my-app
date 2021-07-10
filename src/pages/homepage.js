@@ -5,8 +5,10 @@ import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper'
 import { Router } from 'react-router';
-import treeImage from '../../assets/tree_transparent.png'
 import { borderRadius, fontSize, fontStyle } from '@material-ui/system';
+
+import treeImage from '../assets/tree_transparent.png'
+import sierpinskiImage from '../assets/sierpinski_transparent.png'
 
 const useStyles = makeStyles((theme) => ({
     pageTitle: {
@@ -39,11 +41,14 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(4)
     },
     linkbutton: {
-      padding: theme.spacing(4),
-      marginRight: theme.spacing(15),
-      textAlign: "center",
-      borderRadius: 50,
-      fontSize: 20
+        padding: theme.spacing(4),
+        marginRight: theme.spacing(15),
+        textAlign: "center",
+        borderRadius: 50,
+        fontSize: 20
+    },
+    buttonText: {
+        marginTop: theme.spacing(2)
     }
 }));
 
@@ -57,9 +62,9 @@ function GridLinkButton({classes, to, text, image}) {
                 component={Link}
                 to={to}
             >
-                <Grid container direction="column" justify="flex-start">
-                    <img src={image} />
-                    {text}
+                <Grid container direction="column" justify="flex-start" className={classes.insideButtonGrid}>
+                    <img src={image}/>
+                    <div className={classes.buttonText}>{text}</div>
                 </Grid>
             </Button>
         </Grid>
@@ -78,7 +83,7 @@ const Home = () => {
                 <hr className={classes.horizontalLine}/>
                 <Grid item> <Grid container direction="row">
                     <GridLinkButton classes={classes} image={treeImage} text="Fractal Tree" to="/tree"  />
-                    <GridLinkButton classes={classes} text="Sierpinski Triangles" to="/sierpinski" />
+                    <GridLinkButton classes={classes} image={sierpinskiImage} text="Sierpinski Triangles" to="/sierpinski" />
                     <GridLinkButton classes={classes} text="Mandelbrot Set" to="/mandelbrot" />
                     <GridLinkButton classes={classes} text="L-Systems" to="/lsystems" />
                 </Grid> </Grid>
