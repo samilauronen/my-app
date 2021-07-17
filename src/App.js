@@ -8,9 +8,9 @@ import SierpinskiTrianglesComponent from './pages/fractals/sierpinski-triangles-
 const Main = () => {
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
-      <Route exact path='/' component={Home} />
-      <Route exact path='/tree' component={FractalTreeComponent} />
-      <Route exact path='/sierpinski' component={SierpinskiTrianglesComponent} />
+      <Route exact path='/fractal-playground' component={Home} />
+      <Route exact path='/fractal-playground/tree' component={FractalTreeComponent} />
+      <Route exact path='/fractal-playground/sierpinski' component={SierpinskiTrianglesComponent} />
     </Switch>
   );
 }

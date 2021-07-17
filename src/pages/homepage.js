@@ -82,8 +82,8 @@ const Home = () => {
                 <Grid item> <h2 className={classes.containerTitle}> 2D Fractals </h2> </Grid>
                 <hr className={classes.horizontalLine}/>
                 <Grid item> <Grid container direction="row">
-                    <GridLinkButton classes={classes} image={treeImage} text="Fractal Tree" to="/tree"  />
-                    <GridLinkButton classes={classes} image={sierpinskiImage} text="Sierpinski Triangles" to="/sierpinski" />
+                    <GridLinkButton classes={classes} image={treeImage} text="Fractal Tree" to="fractal-playground/tree"  />
+                    <GridLinkButton classes={classes} image={sierpinskiImage} text="Sierpinski Triangles" to="/fractal-playground/sierpinski" />
                     <GridLinkButton classes={classes} text="Mandelbrot Set" to="/mandelbrot" />
                     <GridLinkButton classes={classes} text="L-Systems" to="/lsystems" />
                 </Grid> </Grid>
