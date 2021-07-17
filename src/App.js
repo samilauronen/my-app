@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './pages/homepage';
 import FractalTreeComponent from './pages/fractals/fractal-tree-page';
 import SierpinskiTrianglesComponent from './pages/fractals/sierpinski-triangles-page';
+import MandelbrotSetComponent from './pages/fractals/mandelbrot-page';
 
 const Main = () => {
   return (
@@ -11,6 +12,7 @@ const Main = () => {
       <Route exact path='/fractal-playground' component={Home} />
       <Route exact path='/fractal-playground/tree' component={FractalTreeComponent} />
       <Route exact path='/fractal-playground/sierpinski' component={SierpinskiTrianglesComponent} />
+      <Route exact path='/fractal-playground/mandelbrot' component={MandelbrotSetComponent} />
     </Switch>
   );
 }
