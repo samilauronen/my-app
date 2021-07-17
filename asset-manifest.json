@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/fractal-playground/static/css/main.30d0f5e9.chunk.css",
-    "main.js": "/fractal-playground/static/js/main.8011b46b.chunk.js",
-    "main.js.map": "/fractal-playground/static/js/main.8011b46b.chunk.js.map",
+    "main.js": "/fractal-playground/static/js/main.f37b693e.chunk.js",
+    "main.js.map": "/fractal-playground/static/js/main.f37b693e.chunk.js.map",
     "runtime-main.js": "/fractal-playground/static/js/runtime-main.49566da6.js",
     "runtime-main.js.map": "/fractal-playground/static/js/runtime-main.49566da6.js.map",
     "static/js/2.18eeba77.chunk.js": "/fractal-playground/static/js/2.18eeba77.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.49566da6.js",
     "static/js/2.18eeba77.chunk.js",
     "static/css/main.30d0f5e9.chunk.css",
-    "static/js/main.8011b46b.chunk.js"
+    "static/js/main.f37b693e.chunk.js"
   ]
 }
